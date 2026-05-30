@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kennedy Data Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #f5f7ff;
+  color: #111;
+  min-height: 100vh;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #0f2a70 0%, #1a3fa8 50%, #2563eb 100%);
+  padding: 0 0 0 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+  display: flex;
+  align-items: stretch;
+}
+
+/* Decorative circles */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: -60px;
+  width: 280px; height: 280px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: 30%;
+  width: 200px; height: 200px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Left text side */
+.hero-left {
+  flex: 1;
+  padding: 32px 0 32px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Logo pill */
+.logo-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 50px;
+  padding: 5px 12px 5px 5px;
+  width: fit-content;
+  margin-bottom: 14px;
+}
+
+.logo-icon {
+  width: 28px; height: 28px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  animation: logoGlow 3s ease-in-out infinite;
+}
+
+.logo-icon svg { width: 16px; height: 16px; }
+
+@keyframes logoGlow {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(255,255,255,0.15); }
+  50%       { box-shadow: 0 0 0 6px rgba(255,255,255,0.3), 0 0 20px rgba(255,255,255,0.2); }
+}
+
+.logo-pill span {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* Brand name */
+.brand-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.4rem, 9vw, 3.6rem);
+  letter-spacing: 3px;
+  line-height: 1.0;
+  color: #ffffff;
+  text-shadow:
+    0 0 20px rgba(147,197,253,0.6),
+    0 0 50px rgba(96,165,250,0.35),
+    0 2px 4px rgba(0,0,0,0.3);
+  animation: nameGlow 3s ease-in-out infinite;
+}
+
+@keyframes nameGlow {
+  0%, 100% { text-shadow: 0 0 20px rgba(147,197,253,0.6), 0 0 50px rgba(96,165,250,0.35), 0 2px 4px rgba(0,0,0,0.3); }
+  50%       { text-shadow: 0 0 30px rgba(147,197,253,0.9), 0 0 80px rgba(96,165,250,0.6), 0 2px 4px rgba(0,0,0,0.3); }
+}
+
+.brand-tagline {
+  margin-top: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+/* Badges row */
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.h-badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.hb-mtn    { background: #fbbf24; color: #000; }
+.hb-tel    { background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+.hb-air    { background: #dc2626; color: #fff; }
+.hb-pre    { background: rgba(34,197,94,0.25); color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
+.hb-dtv    { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+
+/* Right image side */
+.hero-right {
+  width: 155px;
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* Gradient fade on left edge of image */
+.hero-right::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 40px; height: 100%;
+  background: linear-gradient(to right, #1a3fa8, transparent);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── HOW IT WORKS ── */
+.how-strip {
+  background: #1e40af;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.how-strip span { color: rgba(255,255,255,0.7); font-size: 0.7rem; font-weight: 500; }
+.how-strip strong { color: #fff; font-size: 0.72rem; }
+.how-dot { color: rgba(255,255,255,0.3) !important; }
+
+/* ── NAV TABS ── */
+.nav-tabs {
+  background: #fff;
+  border-bottom: 2px solid #e5e7eb;
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 15px 8px;
+  border: none;
+  background: transparent;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.25s;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  letter-spacing: 0.3px;
+}
+
+.tab-btn:hover { color: #374151; background: #f9fafb; }
+.tab-btn.active-data    { color: #2563eb; border-bottom-color: #2563eb; }
+.tab-btn.active-prepaid { color: #16a34a; border-bottom-color: #16a34a; }
+.tab-btn.active-dstv    { color: #dc2626; border-bottom-color: #dc2626; }
+.tab-icon { font-size: 1rem; }
+
+/* ── SECTIONS ── */
+.section { display: none; padding: 24px 16px 110px; max-width: 680px; margin: 0 auto; }
+.section.active { display: block; }
+
+.section-heading { font-size: 1.2rem; font-weight: 800; margin-bottom: 3px; }
+.section-sub { font-size: 0.74rem; color: #6b7280; font-weight: 500; margin-bottom: 18px; }
+
+/* ── NETWORK GROUP ── */
+.network-group { margin-bottom: 26px; }
+
+.network-label {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+
+.net-badge {
+  height: 30px; padding: 0 13px; border-radius: 7px;
+  font-size: 0.72rem; font-weight: 800; letter-spacing: 0.5px;
+  display: flex; align-items: center;
+}
+
+.badge-mtn     { background: #fbbf24; color: #000; }
+.badge-telecom { background: #2563eb; color: #fff; }
+.badge-airtel  { background: #dc2626; color: #fff; }
+.net-price-note { font-size: 0.7rem; color: #9ca3af; font-weight: 500; }
+
+/* ── BUNDLE CARDS ── */
+.bundle-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+
+.b-card {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.b-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.b-card.mtn:hover     { border-color: #fbbf24; }
+.b-card.telecom:hover { border-color: #2563eb; }
+.b-card.airtel:hover  { border-color: #dc2626; }
+
+.b-size { font-size: 1.6rem; font-weight: 900; line-height: 1; margin-bottom: 1px; }
+.mtn .b-size     { color: #d97706; }
+.telecom .b-size { color: #2563eb; }
+.airtel .b-size  { color: #dc2626; }
+
+.b-unit {
+  font-size: 0.6rem; font-weight: 700; color: #9ca3af;
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px;
+}
+
+.b-price {
+  border-radius: 6px; padding: 4px 5px;
+  font-size: 0.76rem; font-weight: 700; color: #111;
+}
+
+.mtn .b-price     { background: #fffbeb; color: #92400e; }
+.telecom .b-price { background: #eff6ff; color: #1e40af; }
+.airtel .b-price  { background: #fef2f2; color: #991b1b; }
+
+.b-card.hot::after {
+  content: '🔥'; position: absolute; top: 5px; right: 7px; font-size: 0.65rem;
+}
+
+.divider { height: 1px; background: #f3f4f6; margin: 18px 0; }
+
+/* ── PREPAID ── */
+.prepaid-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px; }
+
+.p-card {
+  background: #fff; border: 1.5px solid #e5e7eb; border-radius: 16px;
+  padding: 20px 14px; text-align: center; cursor: pointer;
+  text-decoration: none; color: inherit; display: block; transition: all 0.2s; position: relative;
+}
+.p-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); border-color: #16a34a; }
+.p-icon   { font-size: 1.7rem; margin-bottom: 5px; }
+.p-amount { font-size: 1.45rem; font-weight: 900; color: #15803d; line-height: 1; }
+.p-label  { font-size: 0.65rem; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; margin: 4px 0 8px; }
+.p-btn    { background: #dcfce7; color: #15803d; border-radius: 7px; padding: 5px 10px; font-size: 0.72rem; font-weight: 700; }
+.p-custom { grid-column: span 2; }
+.p-custom .p-amount { font-size: 1rem; color: #374151; }
+
+/* ── DSTV ── */
+.dstv-list { display: flex; flex-direction: column; gap: 9px; }
+
+.d-card {
+  background: #fff; border: 1.5px solid #e5e7eb; border-radius: 14px;
+  padding: 15px 16px; display: flex; align-items: center;
+  justify-content: space-between; text-decoration: none; color: inherit;
+  transition: all 0.2s; cursor: pointer;
+}
+.d-card:hover { border-color: #dc2626; box-shadow: 0 4px 16px rgba(220,38,38,0.1); transform: translateX(3px); }
+.d-left  { display: flex; align-items: center; gap: 12px; }
+.d-icon  {
+  width: 40px; height: 40px; background: linear-gradient(135deg, #dc2626, #b91c1c);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.d-name  { font-size: 0.9rem; font-weight: 700; }
+.d-desc  { font-size: 0.67rem; color: #6b7280; font-weight: 500; margin-top: 1px; }
+.d-arrow {
+  width: 30px; height: 30px; background: #fef2f2; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #dc2626; font-size: 1rem; font-weight: 700; flex-shrink: 0;
+}
+
+/* ── BOTTOM BAR ── */
+.bottom-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: #fff; border-top: 1px solid #e5e7eb;
+  padding: 11px 14px; display: flex; gap: 9px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+  z-index: 100; max-width: 680px; margin: 0 auto;
+}
+
+.momo-bar {
+  flex: 1; background: #fffbeb; border: 1.5px solid #fbbf24;
+  border-radius: 12px; padding: 9px 13px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.momo-bar-label { font-size: 0.57rem; font-weight: 700; color: #92400e; text-transform: uppercase; letter-spacing: 1px; }
+.momo-bar-num   { font-size: 0.98rem; font-weight: 900; color: #111; letter-spacing: 1px; }
+.momo-bar-name  { font-size: 0.6rem; color: #6b7280; font-weight: 500; }
+
+.copy-bar-btn {
+  border: none; background: #fbbf24; color: #000;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.62rem; border-radius: 6px; padding: 3px 8px;
+  cursor: pointer; margin-top: 3px; align-self: flex-start; transition: background 0.2s;
+}
+.copy-bar-btn.done { background: #22c55e; color: #fff; }
+
+.wa-bar-btn {
+  background: #25D366; color: white; border: none; border-radius: 12px;
+  padding: 11px 14px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 3px;
+  text-decoration: none; font-family: 'Montserrat', sans-serif;
+  font-weight: 700; font-size: 0.62rem; min-width: 68px;
+  box-shadow: 0 4px 14px rgba(37,211,102,0.3); transition: all 0.2s;
+}
+.wa-bar-btn:hover { background: #20c45e; transform: scale(1.04); }
+.wa-bar-btn svg { width: 21px; height: 21px; fill: white; }
+
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <!-- Left text -->
+  <div class="hero-left">
+    <div class="logo-pill">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.5 8.5a13 13 0 0121 0M5 12a10 10 0 0114 0M8.5 15.5a6 6 0 017 0M12 19h.01"
+            stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span>Official Store</span>
+    </div>
+
+    <div class="brand-name">KENNEDY<br>DATA HUB</div>
+    <div class="brand-tagline">Fast · Reliable · Affordable</div>
+
+    <div class="hero-badges">
+      <span class="h-badge hb-mtn">MTN</span>
+      <span class="h-badge hb-tel">Telecom</span>
+      <span class="h-badge hb-air">Airtel</span>
+      <span class="h-badge hb-pre">⚡ Prepaid</span>
+      <span class="h-badge hb-dtv">📺 DStv</span>
+    </div>
+  </div>
+
+  <!-- Right image -->
+  <div class="hero-right">
+    <img
+      class="hero-img"
+      src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80&auto=format&fit=crop&crop=top"
+      alt="Happy customer making mobile transaction"
+      onerror="this.parentElement.style.display='none'"
+    />
+  </div>
+</div>
+
+<!-- HOW IT WORKS STRIP -->
+<div class="how-strip">
+  <strong>How to Order:</strong>
+  <span>Pick a bundle</span>
+  <span class="how-dot">›</span>
+  <span>Pay MoMo <strong>0595343771</strong></span>
+  <span class="how-dot">›</span>
+  <span>Send screenshot on WhatsApp</span>
+  <span class="how-dot">›</span>
+  <strong>✅ Done!</strong>
+</div>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <button class="tab-btn active-data" id="tab-data" onclick="showSection('data')">
+    <span class="tab-icon">📶</span> Data Bundles
+  </button>
+  <button class="tab-btn" id="tab-prepaid" onclick="showSection('prepaid')">
+    <span class="tab-icon">⚡</span> Prepaid
+  </button>
+  <button class="tab-btn" id="tab-dstv" onclick="showSection('dstv')">
+    <span class="tab-icon">📺</span> DStv
+  </button>
+</div>
+
+<!-- ═══ DATA BUNDLES ═══ -->
+<div class="section active" id="sec-data">
+  <h2 class="section-heading" style="color:#2563eb">📶 Data Bundles</h2>
+  <p class="section-sub">Tap any bundle to order instantly via WhatsApp</p>
+
+  <!-- MTN -->
+  <div class="network-group">
+    <div class="network-label">
+      <div class="net-badge badge-mtn">MTN</div>
+      <span class="net-price-note">GHS 5.40 / GB</span>
+    </div>
+    <div class="bundle-row">
+      <a class="b-card mtn" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20MTN%201GB%20for%20GHS%205.40.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">1</div><div class="b-unit">GB</div><div class="b-price">GHS 5.40</div>
+      </a>
+      <a class="b-card mtn hot" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20MTN%202GB%20for%20GHS%2010.80.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">2</div><div class="b-unit">GB</div><div class="b-price">GHS 10.80</div>
+      </a>
+      <a class="b-card mtn" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20MTN%203GB%20for%20GHS%2016.20.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">3</div><div class="b-unit">GB</div><div class="b-price">GHS 16.20</div>
+      </a>
+      <a class="b-card mtn" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20MTN%205GB%20for%20GHS%2027.00.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">5</div><div class="b-unit">GB</div><div class="b-price">GHS 27.00</div>
+      </a>
+      <a class="b-card mtn hot" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20MTN%2010GB%20for%20GHS%2054.00.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">10</div><div class="b-unit">GB</div><div class="b-price">GHS 54.00</div>
+      </a>
+      <a class="b-card mtn" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20MTN%2015GB%20for%20GHS%2081.00.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">15</div><div class="b-unit">GB</div><div class="b-price">GHS 81.00</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TELECOM -->
+  <div class="network-group">
+    <div class="network-label">
+      <div class="net-badge badge-telecom">TELECOM</div>
+      <span class="net-price-note">GHS 5.40 / GB</span>
+    </div>
+    <div class="bundle-row">
+      <a class="b-card telecom" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20Telecom%201GB%20for%20GHS%205.40.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">1</div><div class="b-unit">GB</div><div class="b-price">GHS 5.40</div>
+      </a>
+      <a class="b-card telecom hot" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20Telecom%202GB%20for%20GHS%2010.80.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">2</div><div class="b-unit">GB</div><div class="b-price">GHS 10.80</div>
+      </a>
+      <a class="b-card telecom" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20Telecom%203GB%20for%20GHS%2016.20.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">3</div><div class="b-unit">GB</div><div class="b-price">GHS 16.20</div>
+      </a>
+      <a class="b-card telecom" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20Telecom%205GB%20for%20GHS%2027.00.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">5</div><div class="b-unit">GB</div><div class="b-price">GHS 27.00</div>
+      </a>
+      <a class="b-card telecom hot" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20Telecom%2010GB%20for%20GHS%2054.00.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">10</div><div class="b-unit">GB</div><div class="b-price">GHS 54.00</div>
+      </a>
+      <a class="b-card telecom" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20Telecom%2015GB%20for%20GHS%2081.00.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">15</div><div class="b-unit">GB</div><div class="b-price">GHS 81.00</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- AIRTEL TIGO -->
+  <div class="network-group">
+    <div class="network-label">
+      <div class="net-badge badge-airtel">AIRTEL TIGO</div>
+      <span class="net-price-note">GHS 5.40 / GB</span>
+    </div>
+    <div class="bundle-row">
+      <a class="b-card airtel" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20Airtel%20Tigo%201GB%20for%20GHS%205.40.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">1</div><div class="b-unit">GB</div><div class="b-price">GHS 5.40</div>
+      </a>
+      <a class="b-card airtel hot" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20Airtel%20Tigo%202GB%20for%20GHS%2010.80.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">2</div><div class="b-unit">GB</div><div class="b-price">GHS 10.80</div>
+      </a>
+      <a class="b-card airtel" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20Airtel%20Tigo%203GB%20for%20GHS%2016.20.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">3</div><div class="b-unit">GB</div><div class="b-price">GHS 16.20</div>
+      </a>
+      <a class="b-card airtel" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20Airtel%20Tigo%205GB%20for%20GHS%2027.00.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">5</div><div class="b-unit">GB</div><div class="b-price">GHS 27.00</div>
+      </a>
+      <a class="b-card airtel hot" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20Airtel%20Tigo%2010GB%20for%20GHS%2054.00.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">10</div><div class="b-unit">GB</div><div class="b-price">GHS 54.00</div>
+      </a>
+      <a class="b-card airtel" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20buy%20Airtel%20Tigo%2015GB%20for%20GHS%2081.00.%0AMy%20number%3A" target="_blank">
+        <div class="b-size">15</div><div class="b-unit">GB</div><div class="b-price">GHS 81.00</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PREPAID ═══ -->
+<div class="section" id="sec-prepaid">
+  <h2 class="section-heading" style="color:#15803d">⚡ Prepaid Electricity</h2>
+  <p class="section-sub">Top up your electricity meter — tap an amount to order</p>
+  <div class="prepaid-grid">
+    <a class="p-card" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20Prepaid%20top-up%20GHS%2020.%20Sending%20MoMo%20screenshot.%0AMeter%20number%3A" target="_blank">
+      <div class="p-icon">⚡</div><div class="p-amount">GHS 20</div>
+      <div class="p-label">Electricity</div><div class="p-btn">Order →</div>
+    </a>
+    <a class="p-card" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20Prepaid%20top-up%20GHS%2050.%20Sending%20MoMo%20screenshot.%0AMeter%20number%3A" target="_blank">
+      <div class="p-icon">⚡</div><div class="p-amount">GHS 50</div>
+      <div class="p-label">Electricity</div><div class="p-btn">Order →</div>
+    </a>
+    <a class="p-card" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20Prepaid%20top-up%20GHS%20100.%20Sending%20MoMo%20screenshot.%0AMeter%20number%3A" target="_blank">
+      <div class="p-icon">⚡</div><div class="p-amount">GHS 100</div>
+      <div class="p-label">Electricity</div><div class="p-btn">Order →</div>
+    </a>
+    <a class="p-card" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20Prepaid%20top-up%20GHS%20200.%20Sending%20MoMo%20screenshot.%0AMeter%20number%3A" target="_blank">
+      <div class="p-icon">⚡</div><div class="p-amount">GHS 200</div>
+      <div class="p-label">Electricity</div><div class="p-btn">Order →</div>
+    </a>
+    <a class="p-card p-custom" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20a%20custom%20Prepaid%20top-up.%0AAmount%3A%0AMeter%20number%3A" target="_blank">
+      <div class="p-icon">✏️</div><div class="p-amount">Custom Amount</div>
+      <div class="p-label">Any amount — just chat us</div>
+      <div class="p-btn" style="background:#f0fdf4;color:#15803d">Chat Ken →</div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══ DSTV ═══ -->
+<div class="section" id="sec-dstv">
+  <h2 class="section-heading" style="color:#dc2626">📺 DStv Subscription</h2>
+  <p class="section-sub">Renew your DStv package — tap a plan to order</p>
+  <div class="dstv-list">
+    <a class="d-card" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20renew%20DStv%20Padi.%20Sending%20MoMo%20screenshot.%0ADecoder%20number%3A" target="_blank">
+      <div class="d-left"><div class="d-icon">📺</div>
+        <div><div class="d-name">DStv Padi</div><div class="d-desc">Entry level · Basic channels</div></div>
+      </div><div class="d-arrow">›</div>
+    </a>
+    <a class="d-card" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20renew%20DStv%20Yanga.%20Sending%20MoMo%20screenshot.%0ADecoder%20number%3A" target="_blank">
+      <div class="d-left"><div class="d-icon">📺</div>
+        <div><div class="d-name">DStv Yanga</div><div class="d-desc">Entertainment · Music · News</div></div>
+      </div><div class="d-arrow">›</div>
+    </a>
+    <a class="d-card" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20renew%20DStv%20Confam.%20Sending%20MoMo%20screenshot.%0ADecoder%20number%3A" target="_blank">
+      <div class="d-left"><div class="d-icon">📺</div>
+        <div><div class="d-name">DStv Confam</div><div class="d-desc">More channels · Sports included</div></div>
+      </div><div class="d-arrow">›</div>
+    </a>
+    <a class="d-card" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20renew%20DStv%20Compact.%20Sending%20MoMo%20screenshot.%0ADecoder%20number%3A" target="_blank">
+      <div class="d-left"><div class="d-icon">📺</div>
+        <div><div class="d-name">DStv Compact</div><div class="d-desc">Great value · SuperSport included</div></div>
+      </div><div class="d-arrow">›</div>
+    </a>
+    <a class="d-card" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20renew%20DStv%20Compact%20Plus.%20Sending%20MoMo%20screenshot.%0ADecoder%20number%3A" target="_blank">
+      <div class="d-left"><div class="d-icon">📺</div>
+        <div><div class="d-name">DStv Compact Plus</div><div class="d-desc">Premium sports · Extra channels</div></div>
+      </div><div class="d-arrow">›</div>
+    </a>
+    <a class="d-card" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20want%20to%20renew%20DStv%20Premium.%20Sending%20MoMo%20screenshot.%0ADecoder%20number%3A" target="_blank">
+      <div class="d-left"><div class="d-icon">📺</div>
+        <div><div class="d-name">DStv Premium</div><div class="d-desc">Full bouquet · All channels</div></div>
+      </div><div class="d-arrow">›</div>
+    </a>
+  </div>
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottom-bar">
+  <div class="momo-bar">
+    <div class="momo-bar-label">📲 Pay via MoMo</div>
+    <div class="momo-bar-num">0595343771</div>
+    <div class="momo-bar-name">Kennedy Forson</div>
+    <button class="copy-bar-btn" id="copyBtn" onclick="copyNum()">Copy Number</button>
+  </div>
+  <a class="wa-bar-btn" href="https://wa.me/233594656642?text=Hi%20Ken%2C%20I%20just%20paid%20via%20MoMo.%20Please%20find%20my%20screenshot%20attached%20%F0%9F%93%B8%0AThe%20number%20I%20want%20the%20bundle%20on%3A" target="_blank">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Send<br>Screenshot
+  </a>
+</div>
+
+<script>
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.className = 'tab-btn');
+  document.getElementById('sec-' + name).classList.add('active');
+  const btn = document.getElementById('tab-' + name);
+  if (name === 'data')    btn.classList.add('active-data');
+  if (name === 'prepaid') btn.classList.add('active-prepaid');
+  if (name === 'dstv')    btn.classList.add('active-dstv');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function copyNum() {
+  const btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText('0595343771').then(() => {
+    btn.textContent = '✅ Copied!'; btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'Copy Number'; btn.classList.remove('done'); }, 2500);
+  }).catch(() => {
+    const el = document.createElement('textarea');
+    el.value = '0595343771'; document.body.appendChild(el); el.select();
+    document.execCommand('copy'); document.body.removeChild(el);
+    btn.textContent = '✅ Copied!'; btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'Copy Number'; btn.classList.remove('done'); }, 2500);
+  });
+}
+</script>
+</body>
+</html>
